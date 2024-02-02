@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game of Life</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    {% block stylesheets %}
+    {% endblock %}
+
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+</head>
+<body>
+<div>
+        <label for="width">width:</label>
+        <input type="text" id="width" name="width" hx-post="/config" hx-trigger="change"
+               hx-swap="innerHTML" hx-target="body" value="{{ width }}">
+        <label for="height">height:</label>
+        <input type="text" id="height" name="height" placeholder="40" hx-post="/config" hx-trigger="change"
+               hx-swap="innerHTML" hx-target="body" value="{{ height }}">
+        <label for="fps">max fps:</label>
+        <input type="text" id="fps" name="fps" placeholder="1" hx-post="/config" hx-trigger="change"
+               hx-swap="innerHTML" hx-target="body" value="{{ fps }}">
+</div>
+<br>
+<div hx-get="/gamefield"
+     hx-trigger="{{ trigger }}"
+     hx-swap="innerHTML"
+     id="game_field">
+</div>
+</body>
+</html>
